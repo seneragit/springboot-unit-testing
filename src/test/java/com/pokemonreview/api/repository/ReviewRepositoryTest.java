@@ -11,7 +11,7 @@ import org.assertj.core.api.Assertions;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
@@ -26,7 +26,10 @@ class ReviewRepositoryTest {
 
     @Test
     public void ReviewRepository_SaveAll_ReturnsSavedReview() {
-        Review review = Review.builder().title("title").content("content").stars(5).build();
+        Review review = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
 
         Review savedReview = reviewRepository.save(review);
 
@@ -36,8 +39,15 @@ class ReviewRepositoryTest {
 
     @Test
     public void ReviewRepostory_GetAll_ReturnsMoreThenOneReview() {
-        Review review = Review.builder().title("title").content("content").stars(5).build();
-        Review review2 = Review.builder().title("title").content("content").stars(5).build();
+        Review review = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
+
+        Review review2 = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
 
         reviewRepository.save(review);
         reviewRepository.save(review2);
@@ -50,7 +60,10 @@ class ReviewRepositoryTest {
 
     @Test
     public void ReviewRepository_FindById_ReturnsSavedReview() {
-        Review review = Review.builder().title("title").content("content").stars(5).build();
+        Review review = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
 
         reviewRepository.save(review);
 
@@ -61,13 +74,17 @@ class ReviewRepositoryTest {
 
     @Test
     public void ReviewRepository_UpdateReview_ReturnReview() {
-        Review review = Review.builder().title("title").content("content").stars(5).build();
+        Review review = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
 
         reviewRepository.save(review);
 
         Review reviewSave = reviewRepository.findById(review.getId()).get();
         reviewSave.setTitle("title");
         reviewSave.setContent("content");
+
         Review udpatedPokemon = reviewRepository.save(reviewSave);
 
         Assertions.assertThat(udpatedPokemon.getTitle()).isNotNull();
@@ -76,11 +93,15 @@ class ReviewRepositoryTest {
 
     @Test
     public void ReviewRepository_ReviewDelete_ReturnReviewIsEmpty() {
-        Review review = Review.builder().title("title").content("content").stars(5).build();
+        Review review = Review.builder()
+                .title("title")
+                .content("content")
+                .stars(5).build();
 
         reviewRepository.save(review);
 
         reviewRepository.deleteById(review.getId());
+
         Optional<Review> reviewReturn = reviewRepository.findById(review.getId());
 
         Assertions.assertThat(reviewReturn).isEmpty();
