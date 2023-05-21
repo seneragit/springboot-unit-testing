@@ -1,11 +1,9 @@
 package com.pokemonreview.api.repository;
 
 import com.pokemonreview.api.models.Pokemon;
-
-
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
