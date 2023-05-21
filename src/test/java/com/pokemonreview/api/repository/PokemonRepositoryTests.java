@@ -56,4 +56,19 @@ public class PokemonRepositoryTests {
 
 
     }
+    @Test
+    public void PokemonRepository_findById_ReturnSelectedPokemonObject() {
+
+        Pokemon pokemon1 = Pokemon.builder()
+                .name("kasun")
+                .type("electric").build();
+
+        pokemonRepository.save(pokemon1);
+
+        Pokemon pokemon = pokemonRepository.findById(pokemon1.getId()).get();
+
+        Assertions.assertThat(pokemon).isNotNull();
+        Assertions.assertThat(pokemon.getName()).isEqualTo("kasun");
+
+    }
 }
